@@ -9,14 +9,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selection = 1
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selection) {
+            NavigationStack {
+                Text("Navigation")
+                    .navigationTitle("Title")
+            }
+            .tabItem {
+                Label("Navigation", systemImage: "checkmark")
+            }
+            .tag(0)
+            VStack(alignment: .leading) {
+                Text("Title")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                VStack {
+                    Text("Font: Large Title")
+                    Text("Weight: Bold")
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .tabItem {
+                Label("Not Navigation", systemImage: "xmark")
+            }
+            .tag(1)
         }
-        .padding()
     }
 }
 
